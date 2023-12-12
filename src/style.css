@@ -1,0 +1,115 @@
+*{
+    font-family: 'Alata', sans-serif;
+}
+
+body {
+    margin: 0; /* Remove the default margin */
+    padding: 0;
+}
+
+
+
+.side-bar {
+    z-index: 2; /* Lower z-index so it's below the top bar */
+    width: 40vh;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    align-items: center;
+    backdrop-filter: blur(5px);
+    
+}
+
+.side-bar h2{
+    color: #000000;
+    text-decoration: none;
+    font-size: 2.5rem;
+    padding-right: 20px;
+    
+    
+    
+}
+
+.main-content {
+    width: 80%;
+    padding: 20px;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .list-icon {
+    width: 30px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+  }
+  
+  .list-name {
+    font-size: 1.5em; /* Adjust as needed */
+    text-decoration: none;
+    color: #000000;
+    padding-left: 10px;
+    
+  }
+li{
+    
+    font-family: 'Alata', sans-serif;
+    margin: 3px 0;
+    height: auto;
+    padding-top: 20px;
+    font-size: 1.125rem;
+    color: var(--textColor);
+    background: transparent;
+    padding: 5px;
+    display: flex;
+    align-items: flex-start;
+    border-radius: 4px;
+    border: solid 2px transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+
+}
+
+button{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    margin: 0;
+
+
+}
+
+#all-projects{
+   
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+
+}
+
+p{
+    font-size: 2rem;
+    color: #000000;
+    font-weight: bold;
+    padding: 10px;
+    
+}
+
+.title-icon {
+    width: 75px; /* Adjust as needed */
+    height: 75px; /* Adjust as needed */
+    vertical-align: middle; 
+  }
+
