@@ -1,3 +1,5 @@
+import todo from "./todo";
+import allTasks from "./allTasks";
 // Create a div element for the blurred background
 
 export default function newToDo() {
@@ -41,17 +43,17 @@ export default function newToDo() {
   form.appendChild(prioritySelect);
 
   const lowOption = document.createElement("option");
-  lowOption.value = "low";
+  lowOption.value = "green";
   lowOption.textContent = "Low";
   prioritySelect.appendChild(lowOption);
 
   const mediumOption = document.createElement("option");
-  mediumOption.value = "medium";
+  mediumOption.value = "yellow";
   mediumOption.textContent = "Medium";
   prioritySelect.appendChild(mediumOption);
 
   const highOption = document.createElement("option");
-  highOption.value = "high";
+  highOption.value = "red";
   highOption.textContent = "High";
   prioritySelect.appendChild(highOption);
 
@@ -60,6 +62,21 @@ export default function newToDo() {
   submitButton.type = "submit";
   submitButton.textContent = "Submit";
   form.appendChild(submitButton);
+
+  // Add event listeners to the form
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const todo1 = todo({
+      title: titleInput.value,
+      description: descriptionInput.value,
+      dueDate: new Date(dueDateInput.value),
+      check: false,
+      priority: prioritySelect.value,
+    });
+    const contentDiv = document.getElementById("all-tasks-div");
+    contentDiv.appendChild(todo1);
+    backgroundDiv.remove();
+  });
 
   // Add a cancel button to the form
   const cancelButton = document.createElement("button");

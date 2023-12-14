@@ -1,14 +1,20 @@
+import "@fortawesome/fontawesome-free/js/all.js";
 import allTasksImage from "./inbox.png";
 import todayImage from "./today1.png";
 import thisWeekImage from "./week2.png";
 import importantImage from "./star.png";
+import newToDo from "./newToDo";
 
 export default function Home() {
   // TODO: Implement logic to show tasks for home
-  const homeContainer = document.createElement("div");
+
   const homeTitle = document.createElement("p");
   homeTitle.textContent = "Home";
-  homeContainer.appendChild(homeTitle);
+
+  const addTaskButton = document.createElement("button");
+  addTaskButton.innerHTML = '<i class="fas fa-plus-circle"></i> Add Task';
+  addTaskButton.classList.add("list-name");
+  addTaskButton.onclick = newToDo;
 
   const homeList = document.createElement("ul");
   homeList.id = "home";
@@ -38,6 +44,7 @@ export default function Home() {
 
   const container = document.createElement("div");
   container.appendChild(homeTitle);
+  container.appendChild(addTaskButton);
   container.appendChild(homeList);
 
   return container;
