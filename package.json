@@ -2,7 +2,7 @@
   "name": "zen-list",
   "version": "1.0.0",
   "description": "Welcome to Zen List, your serene companion for efficient task management. Embrace the tranquility of streamlined organization and effortlessly manage your to-do list. Zen List combines simplicity with powerful features to help you achieve your tasks with calm focus.",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
@@ -19,6 +19,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.5.1"
+    "@fortawesome/fontawesome-free": "^6.5.1",
+    "date-fns": "^2.30.0"
   }
 }
