@@ -19,7 +19,8 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: auto; 
-    align-items: center;
+    align-items: flex-start;
+    padding-left: 50px;
     backdrop-filter: blur(5px);
     
     
@@ -163,7 +164,7 @@ button[type="submit"] {
 }
 
 
-#all-tasks-title{
+#all-tasks-title,#today-title,#this-week-title{
     font-size: 2.5rem;
     color: #000000;
     font-weight: bold;
@@ -191,9 +192,19 @@ button[type="submit"] {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top:10px;
+    
 
     
 }
+
+.todo.checked{
+    opacity: 0.5;
+    text-decoration: line-through;
+
+}
+
+
+
 
 
 .todo-description.hidden {
@@ -213,7 +224,7 @@ button[type="submit"] {
     color: #000000;
 }
 
-.todo-checkbox{
+.check-img{
     margin-left: 20px;
     width: 50px;
     height: 50px;
@@ -235,19 +246,48 @@ button[type="submit"] {
     text-decoration: line-through;
   }
 
-.todo-description{
-    font-size: 1.5rem;
-    max-width:50%;
-    height: auto;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    margin-left: 20px;
-    margin-right: 100px;
-    text-align: center;
-    word-wrap: break-word;
-    max-height: 200px;
-    transition: max-height 0.3s ease-in-out;
-    overflow: hidden;
+
+    .todo-description {
+        font-size: 1.5rem;
+        max-width: 50%;
+        height: auto;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        margin-left: 20px;
+        margin-right: 100px;
+        text-align: center;
+        word-wrap: break-word;
+        max-height: 200px;
+        overflow-y: auto; /* Add this line */
+        transition: max-height 0.3s ease-in-out;
+    }
+
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    width: 98.5%;
+    align-items: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.all-tasks,
+.today,
+.this-week {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 100%;
+    align-items: flex-start;
+    padding-top: 10px;
+    padding: 10px;
+    justify-items: flex-start;
+    overflow-y: auto;
+}
+
+/* Hide scrollbars */
+::-webkit-scrollbar {
+    display: none;
 }
 
 
@@ -261,7 +301,7 @@ button[type="submit"] {
     
 }
 
-.all-tasks{
+.all-tasks,.today,.this-week{
     display: flex;
     flex-direction: column;
     width:95%;
@@ -290,6 +330,10 @@ button[type="submit"] {
     align-items: center;
     justify-content: flex-end;
     padding-right: 10px;
+}
+
+.todo-key{
+    display: none;
 }
 
 

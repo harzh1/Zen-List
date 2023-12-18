@@ -1,4 +1,5 @@
 import todo from "./todo";
+import { parseISO } from "date-fns";
 
 export default function allTasks() {
   const contentDiv = document.getElementById("main-content");
@@ -15,27 +16,48 @@ export default function allTasks() {
   allTasksDiv.id = "all-tasks-div";
   allTasksDiv.classList.add("all-tasks");
 
-  const todo1 = todo({
-    title:
-      "Trip to Nepal to see the Himalayas and the beautiful scenery of the country",
-    description:
-      "Nepal is a beautiful country with a lot of mountains, rivers and lakes. It is a great place to visit for a vacation. The people are very friendly and the food is delicious. I would love to go there again someday. I hope you enjoy your trip to Nepal as much as I did!",
-    dueDate: new Date(),
-    check: false,
-    priority: "red",
-  });
+  if (!localStorage.getItem("todoId")) {
+    const todo1 = {
+      key: 1,
+      title: "Example Task",
+      description:
+        "This is an example task. It is not real. It is just an example. I am just typing to make this description longer. I hope this is long enough. I guess I will just keep typing.",
+      check: false,
+      dueDate: new Date(),
+      priority: "red",
+    };
 
-  const todo2 = todo({
-    title:
-      "Trip to India to see the Himalayas and the beautiful scenery of the country",
-    description:
-      "Nepal is a beautiful country with a lot of mountains, rivers and lakes. It is a great place to visit for a vacation. The people are very friendly and the food is delicious. I would love to go there again someday. I hope you enjoy your trip to Nepal as much as I did!",
-    dueDate: new Date(),
-    check: true,
-    priority: "yellow",
-  });
+    const todo2 = {
+      key: 2,
+      title: "Example Completed Task",
+      description:
+        "This is an example completed task. It is not real. It is just an example. I am just typing to make this description longer. I hope this is long enough. I guess I will just keep typing.",
+      check: true,
+      dueDate: new Date(),
+      priority: "yellow",
+    };
 
-  allTasksDiv.appendChild(todo1);
-  allTasksDiv.appendChild(todo2);
+    const todoElement1 = todo(todo1);
+    const todoElement2 = todo(todo2);
+
+    allTasksDiv.appendChild(todoElement1);
+    allTasksDiv.appendChild(todoElement2);
+
+    localStorage.setItem("todoId", "2");
+    localStorage.setItem(`todo-1`, JSON.stringify(todo1));
+    localStorage.setItem(`todo-2`, JSON.stringify(todo2));
+  } else {
+    let todoId = localStorage.getItem("todoId");
+    for (let i = 1; i <= Number(todoId); i++) {
+      const todoItem = JSON.parse(localStorage.getItem(`todo-${i}`));
+      if (todoItem) {
+        // Parse the dueDate back into a Date object
+        todoItem.dueDate = parseISO(todoItem.dueDate);
+        const todoElement = todo(todoItem);
+        allTasksDiv.appendChild(todoElement);
+      }
+    }
+  }
+
   contentDiv.appendChild(allTasksDiv);
 }

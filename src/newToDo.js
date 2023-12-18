@@ -66,15 +66,53 @@ export default function newToDo() {
   // Add event listeners to the form
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    const todo1 = todo({
-      title: titleInput.value,
-      description: descriptionInput.value,
-      dueDate: new Date(dueDateInput.value),
+    const newTitle = titleInput.value;
+    const newDescription = descriptionInput.value;
+    const newDueDate = dueDateInput.value;
+    const newPriority = prioritySelect.value;
+
+    // Update localStorage
+    let key = Number(localStorage.getItem("todoId")) + 1;
+    if (!key) {
+      localStorage.setItem("todoId", "1");
+      key = 1;
+    }
+
+    const todo1 = {
+      key: key,
+      title: newTitle,
+      description: newDescription,
       check: false,
-      priority: prioritySelect.value,
+      dueDate: new Date(newDueDate),
+      priority: newPriority,
+    };
+
+    const newToDo = todo({
+      key: key,
+      title: newTitle,
+      description: newDescription,
+      check: false,
+      dueDate: new Date(newDueDate),
+      priority: newPriority,
     });
+
+    if (!localStorage.getItem("todoId")) {
+      localStorage.setItem("todoId", "1");
+      let todoId = localStorage.getItem("todoId");
+      newToDo.dataset.key = `todo-${todoId}`;
+      localStorage.setItem(`todo-${todoId}`, JSON.stringify(todo1));
+    } else {
+      localStorage.setItem(
+        "todoId",
+        Number(localStorage.getItem("todoId")) + 1
+      );
+      let todoId = localStorage.getItem("todoId");
+      newToDo.dataset.key = `todo-${todoId}`;
+      localStorage.setItem(`todo-${todoId}`, JSON.stringify(todo1));
+    }
+
     const contentDiv = document.getElementById("all-tasks-div");
-    contentDiv.appendChild(todo1);
+    contentDiv.appendChild(newToDo);
     backgroundDiv.remove();
   });
 

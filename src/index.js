@@ -3,6 +3,14 @@ import sidebar from "./sideBar";
 import bg from "./bg.jpg";
 import newToDo from "./newToDo";
 import allTasks from "./allTasks";
+import favicon from "./icon.png";
+
+let link =
+  document.querySelector("link[rel*='icon']") || document.createElement("link");
+link.type = "image/x-icon";
+link.rel = "shortcut icon";
+link.href = favicon;
+document.getElementsByTagName("head")[0].appendChild(link);
 
 const container = document.getElementById("content");
 container.style.backgroundImage = `url(${bg})`;
