@@ -156,6 +156,16 @@ export default function todo({
       submitButton.textContent = "Update";
       form.appendChild(submitButton);
 
+      const cancelButton = document.createElement("button");
+      cancelButton.type = "button";
+      cancelButton.textContent = "Cancel";
+      form.appendChild(cancelButton);
+
+      // Add event listeners to the cancel button
+      cancelButton.addEventListener("click", () => {
+        backgroundDiv.remove();
+      });
+
       form.addEventListener("submit", (event) => {
         event.preventDefault();
         const updatedTitle = titleInput.value;
