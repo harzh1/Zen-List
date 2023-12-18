@@ -99,7 +99,6 @@ export default function newToDo() {
     if (!localStorage.getItem("todoId")) {
       localStorage.setItem("todoId", "1");
       let todoId = localStorage.getItem("todoId");
-      newToDo.dataset.key = `todo-${todoId}`;
       localStorage.setItem(`todo-${todoId}`, JSON.stringify(todo1));
     } else {
       localStorage.setItem(
@@ -107,7 +106,6 @@ export default function newToDo() {
         Number(localStorage.getItem("todoId")) + 1
       );
       let todoId = localStorage.getItem("todoId");
-      newToDo.dataset.key = `todo-${todoId}`;
       localStorage.setItem(`todo-${todoId}`, JSON.stringify(todo1));
     }
 

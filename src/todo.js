@@ -99,22 +99,38 @@ export default function todo({
       document.body.appendChild(backgroundDiv);
 
       const form = document.createElement("form");
-      form.id = "new-todo-form";
       backgroundDiv.appendChild(form);
+
+      // Add input fields to the form
+      const titleLabel = document.createElement("label");
+      titleLabel.textContent = "Title:";
+      form.appendChild(titleLabel);
 
       const titleInput = document.createElement("input");
       titleInput.type = "text";
       titleInput.value = title;
       form.appendChild(titleInput);
 
+      const descriptionLabel = document.createElement("label");
+      descriptionLabel.textContent = "Description:";
+      form.appendChild(descriptionLabel);
+
       const descriptionInput = document.createElement("textarea");
       descriptionInput.value = description;
       form.appendChild(descriptionInput);
 
+      const dueDateLabel = document.createElement("label");
+      dueDateLabel.textContent = "Due Date:";
+      form.appendChild(dueDateLabel);
+
       const dueDateInput = document.createElement("input");
+      dueDateInput.value = format(dueDate, "dd/MM/yyyy");
       dueDateInput.type = "date";
-      dueDateInput.value = format(dueDate, "yyyy-MM-dd");
       form.appendChild(dueDateInput);
+
+      const priorityLabel = document.createElement("label");
+      priorityLabel.textContent = "Priority:";
+      form.appendChild(priorityLabel);
 
       const prioritySelect = document.createElement("select");
       form.appendChild(prioritySelect);
@@ -122,22 +138,22 @@ export default function todo({
       const lowOption = document.createElement("option");
       lowOption.value = "green";
       lowOption.textContent = "Low";
+      prioritySelect.appendChild(lowOption);
 
       const mediumOption = document.createElement("option");
       mediumOption.value = "yellow";
       mediumOption.textContent = "Medium";
+      prioritySelect.appendChild(mediumOption);
 
       const highOption = document.createElement("option");
       highOption.value = "red";
       highOption.textContent = "High";
-
-      prioritySelect.appendChild(lowOption);
-      prioritySelect.appendChild(mediumOption);
       prioritySelect.appendChild(highOption);
 
+      // Add a submit button to the form
       const submitButton = document.createElement("button");
       submitButton.type = "submit";
-      submitButton.textContent = "Update";
+      submitButton.textContent = "Submit";
       form.appendChild(submitButton);
 
       form.addEventListener("submit", (event) => {
@@ -147,7 +163,7 @@ export default function todo({
         const updatedDueDate = dueDateInput.value;
         const updatedPriority = prioritySelect.value;
 
-        const key = todoDiv.key; // Retrieve the key from the data attribute
+        console.log(key); // Retrieve the key from the data attribute
 
         // Update localStorage
         const updatedTodo = {
@@ -155,24 +171,25 @@ export default function todo({
           title: updatedTitle,
           description: updatedDescription,
           check: check,
-          dueDate: parseISO(updatedDueDate),
+          dueDate: new Date(updatedDueDate), // Updated dueDate assignment
           priority: updatedPriority,
         };
-        localStorage.setItem(key, JSON.stringify(updatedTodo));
+        localStorage.setItem(`todo-${key}`, JSON.stringify(updatedTodo));
 
         // Update UI
-        key = todoDiv.querySelector(".todo-key").textContent;
+        key = key;
         title = updatedTitle;
         description = updatedDescription;
-        dueDate = parseISO(updatedDueDate);
+        dueDate = new Date(updatedDueDate); // Updated dueDate assignment
         priority = updatedPriority;
+
         todoDiv.innerHTML = todoTemplate(
-          key,
           title,
           description,
           check,
           priority,
-          dueDate
+          dueDate,
+          key
         );
 
         backgroundDiv.remove();
