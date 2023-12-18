@@ -153,7 +153,7 @@ export default function todo({
       // Add a submit button to the form
       const submitButton = document.createElement("button");
       submitButton.type = "submit";
-      submitButton.textContent = "Submit";
+      submitButton.textContent = "Update";
       form.appendChild(submitButton);
 
       form.addEventListener("submit", (event) => {
