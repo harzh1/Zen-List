@@ -124,7 +124,7 @@ export default function todo({
       form.appendChild(dueDateLabel);
 
       const dueDateInput = document.createElement("input");
-      dueDateInput.value = format(dueDate, "dd/MM/yyyy");
+      dueDateInput.value = format(dueDate, "yyyy-MM-dd");
       dueDateInput.type = "date";
       form.appendChild(dueDateInput);
 
